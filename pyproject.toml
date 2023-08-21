@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "genesia-templates"
+version = "0.1.0"
+description = "genesia templates"
+authors = ["lucasmrdt <lucas.marandat@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "templates.py", from = "." },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
