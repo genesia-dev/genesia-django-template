@@ -1,16 +1,15 @@
 [tool.poetry]
 name = "genesia-templates"
-version = "0.1.0"
+version = "0.1.5"
 description = "genesia templates"
 authors = ["lucasmrdt <lucas.marandat@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [
-    { include = "templates.py", from = "." },
-]
+packages = [{ include = "genesia_templates" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+jinja2 = "^3.1.2"
 
 
 [build-system]

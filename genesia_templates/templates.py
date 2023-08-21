@@ -1,11 +1,34 @@
 import os.path as op
 import os
 import shutil
-from jinja2 import Environment, FileSystemLoader
+import typing as t
+from jinja2 import Environment, FileSystemLoader, Undefined
 from glob import glob
 
+from jinja2.exceptions import TemplateRuntimeError, UndefinedError
+from jinja2.utils import missing
+
 templates_dir = op.join(op.dirname(__file__), 'templates')
-available_templates = glob(op.join(templates_dir, '*'))
+available_templates = [op.basename(f) for f in glob(op.join(templates_dir, '*'))]
+
+class SilentUndefined(Undefined):
+    def __init__(self, name, *args, **kwargs):
+        super().__init__(name, *args, **kwargs)
+        self.name = name
+
+    def _fail_with_undefined_error(self, *args, **kwargs):
+        name = self.name
+        class EmptyString(str):
+            def __call__(self, *args, **kwargs):
+                return f'{{{{name}}}}'
+        return EmptyString()
+
+    __add__ = __radd__ = __mul__ = __rmul__ = __div__ = __rdiv__ = \
+        __truediv__ = __rtruediv__ = __floordiv__ = __rfloordiv__ = \
+        __mod__ = __rmod__ = __pos__ = __neg__ = __call__ = \
+        __getitem__ = __lt__ = __le__ = __gt__ = __ge__ = __int__ = \
+        __float__ = __complex__ = __pow__ = __rpow__ = \
+        _fail_with_undefined_error
 
 def fill_jinja_templates(template_path: str, data: dict, output_path: str) -> None:
     # Iterate through all files and subdirectories
@@ -30,7 +53,7 @@ def fill_jinja_template(template_path: str, data: dict) -> str:
     template_name = os.path.basename(template_path)
 
     # Create a Jinja2 environment and load the template
-    env = Environment(loader=FileSystemLoader(base_dir))
+    env = Environment(loader=FileSystemLoader(base_dir), undefined=SilentUndefined)
     env.filters['pascal_case'] = pascal_case
     env.trim_blocks = True
     env.lstrip_blocks = True
@@ -48,6 +71,9 @@ def pascal_case(s):
 
 
 def create_project_from_template(template_name, project_name, jinja_result):
+    assert template_name in available_templates, f'Unknown template {template_name}'
+    assert not op.exists(project_name), f'Project {project_name} already exists'
+
     template_dir = op.join(templates_dir, template_name)
     # copy directory
     shutil.copytree(template_dir, project_name)
