@@ -2,7 +2,10 @@ from django.http import JsonResponse
 from .models import {{ models|map(attribute='name')|join(', ') }}
 
 {% for view in views %}
-def {{ view.function_name }}(request, {{ view.function_params|map(attribute='name')|join(', ') }}):
+def {{ view.function_name }}(request{% for param in view.function_params %}, {{ param.name }}{% endfor %}):
+    """
+    {{ view.function_documentation }}
+    """
 {{ view.function_body }}
     
 {% endfor %}
