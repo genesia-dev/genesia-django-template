@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "genesia-templates"
-version = "0.1.5"
+version = "0.1.7"
 description = "genesia templates"
 authors = ["lucasmrdt <lucas.marandat@gmail.com>"]
 license = "MIT"
