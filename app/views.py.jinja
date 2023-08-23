@@ -12,22 +12,3 @@ def {{ view.function_name }}(request{% if view.urlpatterns_path != '' %}, {{view
 {{ view.function_body }}
     
 {% endfor %}
-
-
-# from django.http import JsonResponse
-# from .models import Hotel
-
-# def hotels(request):
-#     hotels_data = []
-#     hotels = Hotel.objects.prefetch_related("booking_set").all()
-
-#     for hotel in hotels:
-#         bookings = hotel.booking_set.all().values("check_in_date", "check_out_date")
-#         hotel_data = {
-#             "name": hotel.name,
-#             "location": hotel.location,
-#             "bookings": list(bookings),
-#         }
-#         hotels_data.append(hotel_data)
-
-#     return JsonResponse(hotels_data, safe=False)
