@@ -21,6 +21,6 @@ from app.views import {{ views|map(attribute='function_name')|join(', ') }}
 urlpatterns = [
     path('admin/', admin.site.urls),
     {% for view in views %}
-    path('{{ view.function_name }}', {{ view.function_name }}),
+    path('{{ view.urlpatterns_path }}', {{ view.function_name }}),
     {% endfor %}
 ]

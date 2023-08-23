@@ -5,7 +5,7 @@ from .models import {{ models|map(attribute='name')|join(', ') }}
 {% endfor %}
 
 {% for view in views %}
-def {{ view.function_name }}(request{% if view.urlpatterns_path != '' %}, {{view.urlpatterns_path }}{% endif %}):
+def {{ view.function_name }}(request{% if view.urlpatterns_path|extract_path_parameters != '' %}, {{view.urlpatterns_path|extract_path_parameters }}{% endif %}):
     """
     {{ view.function_documentation }}
     """
