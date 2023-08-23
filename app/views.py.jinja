@@ -1,8 +1,11 @@
 from django.http import JsonResponse
 from .models import {{ models|map(attribute='name')|join(', ') }}
+{% for view in views %}
+{{ view.function_imports }}
+{% endfor %}
 
 {% for view in views %}
-def {{ view.function_name }}(request{% for param in view.function_params %}, {{ param.name }}{% endfor %}):
+def {{ view.function_name }}(request{% if view.urlpatterns_path != '' %}, {{view.urlpatterns_path }}{% endif %}):
     """
     {{ view.function_documentation }}
     """
