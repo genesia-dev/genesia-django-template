@@ -9,10 +9,7 @@ Creating a new Django project is relatively straightforward. Here's a step-by-st
 
 2. **Create a new project**: Once Genesia is installed, you can create a new project by running the following command:
    ```bash
-   genesia create \
-  --name "myproject" \
-  --template "django" \
-  --prompt "Hotel Booking API"
+   genesia create --name "myproject" --template "django" --prompt "Hotel Booking API"
    ```
    Replace "myproject" with the name you want for your project.
 
