@@ -1,17 +1,17 @@
 # Generate a new project
 
-1. **Install Genesia**: You can install Genesia using pip, a package manager for Python. Open a command prompt or terminal window and run:
+1. **Install Genesia**
    ```bash
    pip install genesia
    ```
 
-2. **Create a new project**: Once Genesia is installed, you can create a new project by running the following command:
+2. **Create a new project**
    ```bash
    genesia create --name "myproject" --template "django" --prompt "Hotel Booking API"
    ```
    Replace "myproject" with the name you want for your project.
 
-3. **Install Django**: You can install Django using pip, a package manager for Python. Open a command prompt or terminal window and run:
+3. **Install Django**:
    ```bash
    pip install django
    ```
