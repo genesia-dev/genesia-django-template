@@ -26,7 +26,7 @@ Creating a new Django project is relatively straightforward. Here's a step-by-st
    cd myproject
    ```
 
-4. **Run the development server**: You can start the development server to see your project in the browser:
+5. **Run the development server**: You can start the development server to see your project in the browser:
    ```bash
    python manage.py runserver
    ```
